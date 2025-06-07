@@ -40,10 +40,10 @@
             <Label x:Name="label" Content="Product Management" Grid.Column="2" Grid.Row="0" FontSize="36" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="466"/>
 
             <Label x:Name="label1" Margin ="2,2,2,2"  Content="Product ID" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="txtProductID" Margin ="4,4,4,4" Grid.Column="2" Grid.Row="1" Text="" TextWrapping="Wrap" Grid.ColumnSpan="2" IsEnabled="False" />
+            <TextBox x:Name="txtProductID" Margin ="4,4,4,4" Grid.Column="2" Grid.Row="1" Text="" TextWrapping="Wrap" Grid.ColumnSpan="2" IsEnabled="False" TextChanged="txtProductID_TextChanged" />
 
             <Label x:Name="label2" Margin ="2,2,2,2" Grid.Column="0" Grid.Row="2" Content="Product Name" Grid.ColumnSpan="2" />
-            <TextBox x:Name="txtProductName" Margin ="4,4,4,4" Grid.Column="2" Grid.Row="2" Text="" TextWrapping="Wrap" Grid.ColumnSpan="2" />
+            <TextBox x:Name="txtProductName" Margin ="4,4,4,4" Grid.Column="2" Grid.Row="2" Text="" TextWrapping="Wrap" Grid.ColumnSpan="2" TextChanged="txtProductName_TextChanged" />
 
             <Label x:Name="label8" Margin ="2,2,2,2" Content="Price" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"/>
             <TextBox x:Name="txtPrice"  Margin ="4,4,4,4" Grid.Column="2" Grid.Row="3" Text="" TextWrapping="Wrap" Grid.ColumnSpan="2" />

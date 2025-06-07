@@ -1,38 +1,30 @@
 ﻿using BusinessObjects;
+using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer
 {
     public class CategoryDAO
     {
+        private static string connStr = DAO.GetConnectionString();
+
         public static List<Category> GetCategories()
         {
-            Category beverager = new Category(1, "Beverages");
-            Category condiments = new Category(2, "Condiments");
-            Category confections = new Category(3, "Confections");
-            Category dairy = new Category(4, "Dairy Products");
-            Category grains = new Category(5, "Grains/Cereals");
-            Category meat = new Category(6, "Meat/Poultry");
-            Category produce = new Category(7, "Produce");
-            Category seafood = new Category(8, "Seafood");
+            List<Category> list = new List<Category>();
+            string sql = "SELECT * FROM Categories";
 
-            var listCatergories = new List<Category>();
-            try
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            conn.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                listCatergories.Add(beverager);
-                listCatergories.Add(condiments);
-                listCatergories.Add(confections);
-                listCatergories.Add(dairy);
-                listCatergories.Add(grains);
-                listCatergories.Add(meat);
-                listCatergories.Add(produce);
-                listCatergories.Add(seafood);
+                list.Add(new Category
+                {
+                    CategoryId = Convert.ToInt32(reader["CategoryID"]),
+                    CategoryName = reader["CategoryName"].ToString()
+                });
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return listCatergories;
-
+            return list;
         }
     }
 }

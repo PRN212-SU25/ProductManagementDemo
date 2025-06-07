@@ -1,17 +1,16 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using BusinessObjects;
 using Services;
 
 namespace WPFApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly IProductService iProductService;
         private readonly ICategoryService iCategoryService;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,16 +60,28 @@ namespace WPFApp
         {
             try
             {
-                Product product = new Product();
-                product.ProductName = txtProductName.Text;
-                product.UnitPrice = Decimal.Parse(txtPrice.Text);
-                product.UnitInStock = short.Parse(txtUnitsInStock.Text);
-                product.CategoryId = Int32.Parse(cboCategory.SelectedValue.ToString());
+                if (string.IsNullOrWhiteSpace(txtProductName.Text) ||
+                    string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                    string.IsNullOrWhiteSpace(txtUnitsInStock.Text) ||
+                    cboCategory.SelectedValue == null)
+                {
+                    MessageBox.Show("All fields are required.");
+                    return;
+                }
+
+                Product product = new Product
+                {
+                    ProductName = txtProductName.Text,
+                    UnitPrice = decimal.Parse(txtPrice.Text),
+                    UnitInStock = short.Parse(txtUnitsInStock.Text),
+                    CategoryId = (int)cboCategory.SelectedValue
+                };
+
                 iProductService.SaveProduct(product);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error creating product: " + ex.Message);
             }
             finally
             {
@@ -78,51 +89,30 @@ namespace WPFApp
             }
         }
 
-
-        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dataGrid = sender as DataGrid;
-            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
-            DataGridCell RowColumn = dataGrid.Columns[0].GetCellContent(row).Parent as DataGridCell;
-            string id = ((TextBlock)RowColumn.Content).Text;
-            Product product = iProductService.GetProductById(Int32.Parse(id));
-            txtProductID.Text = product.ProductId.ToString();
-            txtProductName.Text = product.ProductName;
-            txtPrice.Text = product.UnitPrice.ToString();
-            txtUnitsInStock.Text = product.UnitInStock.ToString();
-            cboCategory.SelectedValue = product.CategoryId;
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            //this.Close();
-            //*Note: When I clicked the button "Close",
-            //the UI was off but the backstage still work under background
-            Application.Current.Shutdown();
-        }
-
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (txtProductID.Text.Length > 0)
+                if (int.TryParse(txtProductID.Text, out int productId))
                 {
-                    Product product = new Product();
-                    product.ProductId = Int32.Parse(txtProductID.Text);
-                    product.ProductName = txtProductName.Text;
-                    product.UnitPrice = decimal.Parse(txtPrice.Text);
-                    product.UnitInStock = short.Parse(txtUnitsInStock.Text);
-                    product.CategoryId = Int32.Parse(cboCategory.SelectedValue.ToString());
+                    Product product = new Product
+                    {
+                        ProductId = productId,
+                        ProductName = txtProductName.Text,
+                        UnitPrice = decimal.Parse(txtPrice.Text),
+                        UnitInStock = short.Parse(txtUnitsInStock.Text),
+                        CategoryId = (int)cboCategory.SelectedValue
+                    };
                     iProductService.UpdateProduct(product);
                 }
                 else
                 {
-                    MessageBox.Show("You must select a Product !");
+                    MessageBox.Show("You must select a product to update.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error updating product: " + ex.Message);
             }
             finally
             {
@@ -134,24 +124,18 @@ namespace WPFApp
         {
             try
             {
-                if (txtProductID.Text.Length > 0)
+                if (int.TryParse(txtProductID.Text, out int productId))
                 {
-                    Product product = new Product();
-                    product.ProductId = Int32.Parse(txtProductID.Text);
-                    product.ProductName = txtProductName.Text;
-                    product.UnitPrice = decimal.Parse(txtPrice.Text);
-                    product.UnitInStock = short.Parse(txtUnitsInStock.Text);
-                    product.CategoryId = Int32.Parse(cboCategory.SelectedValue.ToString());
-                    iProductService.DeleteProduct(product);
+                    iProductService.DeleteProduct(productId);
                 }
                 else
                 {
-                    MessageBox.Show("You must select a Product !");
+                    MessageBox.Show("You must select a product to delete.");
                 }
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show("Error deleting product: " + ex.Message);
             }
             finally
             {
@@ -159,14 +143,94 @@ namespace WPFApp
             }
         }
 
-        private void resetInput()
-        {                        
-            txtProductID.Text = "";
-            txtProductName.Text = "";
-            txtPrice.Text = "";
-            txtUnitsInStock.Text = "";
-            cboCategory.SelectedIndex = 0;            
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgData.SelectedItem is Product product)
+            {
+                txtProductID.Text = product.ProductId.ToString();
+                txtProductName.Text = product.ProductName;
+                txtPrice.Text = product.UnitPrice.ToString();
+                txtUnitsInStock.Text = product.UnitInStock.ToString();
+                cboCategory.SelectedValue = product.CategoryId;
+            }
         }
 
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void resetInput()
+        {
+            txtProductID.Clear();
+            txtProductName.Clear();
+            txtPrice.Clear();
+            txtUnitsInStock.Clear();
+            cboCategory.SelectedIndex = -1;
+        }
+
+        private void txtProductID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(txtProductID.Text, out int productId))
+            {
+                try
+                {
+                    Product product = iProductService.GetProductById(productId);
+                    if (product != null)
+                    {
+                        txtProductName.Text = product.ProductName;
+                        txtPrice.Text = product.UnitPrice.ToString();
+                        txtUnitsInStock.Text = product.UnitInStock.ToString();
+                        cboCategory.SelectedValue = product.CategoryId;
+                    }
+                    else
+                    {
+                        // If no product found, clear input fields except ID
+                        txtProductName.Clear();
+                        txtPrice.Clear();
+                        txtUnitsInStock.Clear();
+                        cboCategory.SelectedIndex = -1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading product: " + ex.Message);
+                }
+            }
+            else
+            {
+                // If not a valid number, clear other fields
+                txtProductName.Clear();
+                txtPrice.Clear();
+                txtUnitsInStock.Clear();
+                cboCategory.SelectedIndex = -1;
+            }
+        }
+
+        private void txtProductName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string name = txtProductName.Text.Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                try
+                {
+                    // Assuming product names are unique
+                    var matchedProduct = iProductService.GetProducts()
+                                            .FirstOrDefault(p => p.ProductName.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+                    if (matchedProduct != null)
+                    {
+                        txtProductID.Text = matchedProduct.ProductId.ToString();
+                        txtPrice.Text = matchedProduct.UnitPrice.ToString();
+                        txtUnitsInStock.Text = matchedProduct.UnitInStock.ToString();
+                        cboCategory.SelectedValue = matchedProduct.CategoryId;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading product: " + ex.Message);
+                }
+            }
+        }
     }
 }
