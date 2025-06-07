@@ -5,6 +5,9 @@ namespace Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public AccountMember GetAccountById(string accountID) => AccountDAO.GetAccountById(accountID);
+        public AccountMember Login(string memberId, string password)
+        {
+            return AccountDAO.Login(memberId, password);
+        }
     }
 }

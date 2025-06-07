@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Services\\Services.csproj": {}
+    "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Services\\Services.csproj": {}
   },
   "projects": {
-    "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
+    "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\obj\\",
+        "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\ledin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ledin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -69,20 +70,20 @@
         }
       }
     },
-    "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\obj\\",
+        "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\ledin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ledin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -91,14 +92,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj"
               }
             }
           }
@@ -118,6 +120,24 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Microsoft.IdentityModel.Protocols": {
+              "target": "Package",
+              "version": "[8.12.0, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -138,20 +158,20 @@
         }
       }
     },
-    "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\Repositories.csproj": {
+    "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\obj\\",
+        "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\ledin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ledin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -160,17 +180,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\BusinessObjects\\BusinessObjects.csproj"
               },
-              "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\DataAccessLayer\\DataAccessLayer.csproj"
               }
             }
           }
@@ -210,20 +231,20 @@
         }
       }
     },
-    "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Services\\Services.csproj": {
+    "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Services\\obj\\",
+        "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\ledin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ledin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -232,14 +253,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\Repositories.csproj": {
-                "projectPath": "E:\\FPTU\\s5\\PRN212\\Lab\\ProductManagementDemo\\Repositories\\Repositories.csproj"
+              "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\ledin\\source\\repos\\legiahanphamm\\ProductManagementDemo\\Repositories\\Repositories.csproj"
               }
             }
           }

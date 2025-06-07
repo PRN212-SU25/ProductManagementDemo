@@ -16,11 +16,14 @@ namespace WPFApp
             InitializeComponent();
             iAccountService = new AccountService();
         }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            AccountMember account = iAccountService.GetAccountById(txtUser.Text);
-            if (account != null && account.MemberPassword.Equals(txtPass.Password) && account.MemberRole == 1)
+            string user = txtUser.Text.Trim();
+            string pass = txtPass.Password;
+
+            AccountMember account = iAccountService.Login(user, pass);
+
+            if (account != null && account.MemberRole == 1)
             {
                 this.Hide();
                 MainWindow mainWindow = new MainWindow();
@@ -28,13 +31,19 @@ namespace WPFApp
             }
             else
             {
-                MessageBox.Show("You are not permission");
+                MessageBox.Show("Invalid credentials or no permission.");
             }
         }
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {            
             this.Close();
+        }
+
+        private void txtUser_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+
         }
     }
 }

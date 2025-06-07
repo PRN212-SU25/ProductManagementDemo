@@ -11,9 +11,10 @@ namespace Services
         {
             iAccountRepository = new AccountRepository();
         }
-        public AccountMember GetAccountById(string accountID)
+        public AccountMember Login(string memberId, string password)
         {
-            return iAccountRepository.GetAccountById(accountID);
+            return iAccountRepository.Login(memberId, password);
         }
+
     }
 }

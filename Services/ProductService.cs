@@ -11,9 +11,9 @@ namespace Services
         {
             iProductRepository = new ProductRepository();
         }
-        public void DeleteProduct(Product p)
+        public void DeleteProduct(int id)
         {
-            iProductRepository.DeleteProduct(p);
+            iProductRepository.DeleteProduct(id);
         }
 
         public Product GetProductById(int id)

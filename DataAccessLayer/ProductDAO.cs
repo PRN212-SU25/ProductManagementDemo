@@ -1,92 +1,91 @@
 ﻿using BusinessObjects;
+using Microsoft.Data.SqlClient;
 
 namespace DataAccessLayer
 {
     public class ProductDAO
     {
-        private static List<Product> listProducts;
+        private static string connStr = DAO.GetConnectionString();
 
-        static ProductDAO()
+        public static void AddProduct(Product p)
         {
-            Product chai = new Product(1, "Chai", 3, 12, 18);
-            Product chang = new Product(2, "Chang", 1, 23, 19);
-            Product aniseed = new Product(3, "Aniseed Syrup", 2, 23, 10);
-            listProducts = new List<Product> { chai, chang, aniseed };
-            Product chef = new Product(4, "Chef Anton's Cajun Seasoning", 2, 34, 22);
-            Product chefMix = new Product(5, "Chef Anton's Gumbo Mix", 2, 45, 34);
-            Product grandma = new Product(6, "Grandma's Boysenberry Spread", 2, 21, 25);
-            Product uncle = new Product(7, "Uncle Bob's Organic Dried Pears", 7, 22, 30);
-            Product northwoods = new Product(8, "Northwoods Cranberry Sauce", 2, 10, 40);
-            Product mishi = new Product(9, "Mishi Kobe Niku", 6, 12, 97);
-            Product ikura = new Product(10, "Ikura", 8, 13, 32);
-
-            listProducts = new List<Product> {
-                chai, chang, aniseed, chef, chefMix, grandma, uncle, northwoods, mishi, ikura
-            };
-
+            string sql = "INSERT INTO Products (ProductName, CategoryID, UnitsInStock, UnitPrice) VALUES (@name, @cat, @stock, @price)";
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@name", p.ProductName);
+            cmd.Parameters.AddWithValue("@cat", p.CategoryId);
+            cmd.Parameters.AddWithValue("@stock", p.UnitInStock);
+            cmd.Parameters.AddWithValue("@price", p.UnitPrice);
+            conn.Open();
+            cmd.ExecuteNonQuery();
         }
 
-        public static List<Product> GetProducts()
+        public static void UpdateProduct(Product p)
         {
-            return listProducts;
+            string sql = "UPDATE Products SET ProductName = @name, CategoryID = @cat, UnitsInStock = @stock, UnitPrice = @price WHERE ProductID = @id";
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", p.ProductId);
+            cmd.Parameters.AddWithValue("@name", p.ProductName);
+            cmd.Parameters.AddWithValue("@cat", p.CategoryId);
+            cmd.Parameters.AddWithValue("@stock", p.UnitInStock);
+            cmd.Parameters.AddWithValue("@price", p.UnitPrice);
+            conn.Open();
+            cmd.ExecuteNonQuery();
         }
 
-        public static List<Product> GetProducts()
+        public static void DeleteProduct(int id)
         {
-            var listProducts = new List<Product>();
-            try
-            {
-                using var db = new MyStoreContext();
-                listProducts = db.Products.ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return listProducts;
-        }
-
-        public static void SaveProduct(Product p)
-        {
-            listProducts.Add(p);
-        }
-
-        public static void UpdateProduct(Product product)
-        {
-            foreach (Product p in listProducts.ToList())
-            {
-                if(p.ProductId == product.ProductId)
-                {
-                    p.ProductId = product.ProductId;
-                    p.ProductName = product.ProductName;
-                    p.UnitPrice = product.UnitPrice;
-                    p.UnitInStock = product.UnitInStock;
-                    p.CategoryId = product.CategoryId;
-                }
-            }
-        }
-
-        public static void DeleteProduct(Product product)
-        {
-            foreach (Product p in listProducts.ToList())
-            {
-                if (p.ProductId == product.ProductId)
-                {
-                    listProducts.Remove(p);
-                }
-            }
+            string sql = "DELETE FROM Products WHERE ProductID = @id";
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            conn.Open();
+            cmd.ExecuteNonQuery();
         }
 
         public static Product GetProductById(int id)
         {
-            foreach (Product p in listProducts.ToList())
+            string sql = "SELECT * FROM Products WHERE ProductID = @id";
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            conn.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
             {
-                if(p.ProductId == id)
+                return new Product
                 {
-                    return p;
-                }
+                    ProductId = Convert.ToInt32(reader["ProductID"]),
+                    ProductName = reader["ProductName"].ToString(),
+                    CategoryId = Convert.ToInt32(reader["CategoryID"]),
+                    UnitInStock = Convert.ToInt16(reader["UnitsInStock"]),
+                    UnitPrice = Convert.ToDecimal(reader["UnitPrice"])
+                };
             }
             return null;
+        }
+
+        public static List<Product> GetAllProducts()
+        {
+            List<Product> list = new List<Product>();
+            string sql = "SELECT * FROM Products";
+            using SqlConnection conn = new SqlConnection(connStr);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            conn.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new Product
+                {
+                    ProductId = Convert.ToInt32(reader["ProductID"]),
+                    ProductName = reader["ProductName"].ToString(),
+                    CategoryId = Convert.ToInt32(reader["CategoryID"]),
+                    UnitInStock = Convert.ToInt16(reader["UnitsInStock"]),
+                    UnitPrice = Convert.ToDecimal(reader["UnitPrice"])
+                });
+            }
+            return list;
         }
     }
 }
