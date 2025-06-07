@@ -4,6 +4,7 @@ namespace Services
 {
     public interface IAccountService
     {
-        AccountMember GetAccountById(string accountID);
+        AccountMember Login(string memberId, string password);
+
     }
 }

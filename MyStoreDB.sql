@@ -1,5 +1,4 @@
-USE [master]
-GO
+
 /****** Object:  Database [MyStore]    Script Date: 5/6/2024 11:32:56 AM ******/
 CREATE DATABASE [MyStore]
 
@@ -142,8 +141,7 @@ Create Proc [dbo].[spCountProductsUsingReturnValue](@CategoryID int)  As
 	where CategoryID = @CategoryID
 	Group by CategoryID
 	Return  @NumberOfProducts
-GO
-USE [master]
+
 GO
 ALTER DATABASE [MyStore] SET  READ_WRITE 
 GO

@@ -6,7 +6,7 @@ namespace Repositories
     {
         void SaveProduct(Product p);
         void UpdateProduct(Product p);
-        void DeleteProduct(Product p);
+        void DeleteProduct(int id);
 
         List<Product> GetProducts();
         Product GetProductById(int id);

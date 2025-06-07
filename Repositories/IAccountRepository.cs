@@ -4,7 +4,7 @@ namespace Repositories
 {
     public interface IAccountRepository
     {
-        AccountMember GetAccountById(string accountID);
-        //List<Category> GetCategories();
+        AccountMember Login(string memberId, string password);
+
     }
 }
